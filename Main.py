@@ -27,6 +27,7 @@ user_id = sp.current_user()["id"]
 
 #search the songs by uri
 year = users_date.split("-")[0]
+
 song_uris = []
 for song in song_names:
     result = sp.search(q=f"track:{song} year:{year}", type="track")
@@ -37,6 +38,6 @@ for song in song_names:
         print(f"{song} doesn't exist in Spotify. Skipped.")
 
 #cretae the new Playlist with the URIs found
-playlist = sp.user_playlist_create(user_id,f"100 songs of year {year}", public=False, collaborative=False, description=f"Top Billboard 100 songs of year {year}")
+playlist = sp.user_playlist_create(user_id,f"100 songs of {users_date}", public=False, collaborative=False, description=f"Top Billboard 100 songs of year {year}")
 print(playlist)
 sp.playlist_add_items(playlist_id=playlist["id"], items=song_uris)
